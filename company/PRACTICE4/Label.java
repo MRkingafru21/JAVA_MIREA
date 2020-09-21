@@ -10,46 +10,44 @@ public class Label extends JFrame {
 
     JButton ACMilan = new JButton();
     ImageIcon ACMilanIcon =
-            new ImageIcon((new ImageIcon("C:\\Users\\kinga\\Desktop\\ACM.png").getImage()
+            new ImageIcon((new ImageIcon("image/ACM.png").getImage()
                     .getScaledInstance(250, 250, Image.SCALE_SMOOTH)));
 
     JButton RealMadrid = new JButton();
     ImageIcon RealMadridIcon =
-            new ImageIcon(new ImageIcon("C:\\Users\\kinga\\Desktop\\RM.png").getImage()
+            new ImageIcon(new ImageIcon("image/RM.png").getImage()
                     .getScaledInstance(250, 250, Image.SCALE_SMOOTH));
 
+    JLabel winner = new JLabel("Winner: DRAW");
     JLabel result = new JLabel("Result: 0 X 0");
     JLabel lastScore = new JLabel("N/A");
-    JLabel winner = new JLabel("Winner: DRAW");
     JLabel ACMilanTeam = new JLabel("AC Milan");
+    JLabel RealMadridTeam = new JLabel("Real Madrid");
     Font fnt = new Font("Ink Free", Font.ITALIC, 40);
 
-    // Метод для обработки информации о победителе
     public void printWinner() {
-        if (ACMilanScore > RealMadridScore) {
-            winner.setText("Winner: AC Milan");
-        } else if (ACMilanScore < RealMadridScore) {
+        if (ACMilanScore < RealMadridScore) {
             winner.setText("Winner: Real Madrid");
+        } else if (ACMilanScore > RealMadridScore) {
+            winner.setText("Winner: AC Milan");
         } else {
             winner.setText("DRAW");
         }
-    }
+    }//условие выведения победителя
 
-    // Метод для обработки полей счета, победителя и последнего забившего
     public void JLabelSettings(JLabel jlabel) {
         jlabel.setHorizontalAlignment(JLabel.CENTER);
         jlabel.setForeground(Color.PINK);
         jlabel.setFont(fnt);
-    }
+    } // Метод для обработки полей winner,result,lastScore
 
-    // Метод обработки кнопок команд
     public void teamButton(JButton team, String teamName, Color color) {
         team.setText(teamName);
         team.setHorizontalTextPosition(JButton.CENTER);
         team.setForeground(color);
         team.setBackground(color.white);
         team.setFont(fnt);
-    }
+    }// Метод обработки кнопок команд
 
     Label() {
         // Параметры окна
@@ -64,7 +62,6 @@ public class Label extends JFrame {
         RealMadrid.setFocusable(false);
         RealMadrid.setBorderPainted(false);
 
-        // Обработка AC Milan
         add(ACMilan, BorderLayout.NORTH);
         ActionListener ACMilanListener = new ActionListener() {
             @Override
@@ -79,7 +76,6 @@ public class Label extends JFrame {
         ACMilan.addActionListener(ACMilanListener);
         ACMilan.setVerticalTextPosition(JButton.TOP);
 
-        // Обработка Real Madrid
         add(RealMadrid, BorderLayout.SOUTH);
         ActionListener RealMadridListener = new ActionListener() {
             @Override
@@ -93,16 +89,13 @@ public class Label extends JFrame {
         teamButton(RealMadrid, "Real Madrid", Color.yellow);
         RealMadrid.addActionListener(RealMadridListener);
         RealMadrid.setVerticalTextPosition(JButton.BOTTOM);
-
-        // Обработка счета
-        add(result, BorderLayout.CENTER);
-        JLabelSettings(result);
-
-        // Обработка победителя
+        
         add(winner, BorderLayout.WEST);
         JLabelSettings(winner);
 
-        // Обработка последнего забившего
+        add(result, BorderLayout.CENTER);
+        JLabelSettings(result);
+
         add(lastScore, BorderLayout.EAST);
         JLabelSettings(lastScore);
 
